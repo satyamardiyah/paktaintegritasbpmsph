@@ -1,0 +1,643 @@
+/* Reset */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:#f4f6fa;
+    font-family:"Segoe UI",sans-serif;
+}
+
+/* Warna */
+:root{
+    --blue:#2E65AB;
+    --gold:#000;
+    --white:#ffffff;
+    --text:#333;
+    --bg:#f4f6fa;
+}
+
+/* Layout */
+.wrapper{
+    display:flex;
+}
+
+/* Sidebar */
+
+.sidebar{
+
+    width:260px;
+    height:100vh;
+
+    position:fixed;
+    left:0;
+    top:0;
+
+    background:var(--blue);
+
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+
+    box-shadow:0 0 15px rgba(0,0,0,.12);
+
+    transition:.3s;
+
+}
+.sidebar.close{
+
+    width:80px;
+
+}
+.sidebar.close .brand-text h3,
+.sidebar.close .brand-text small{
+
+    display:none;
+
+}
+.sidebar.close .logo-box{
+
+    width:48px;
+    height:48px;
+
+}
+.sidebar.close .menu{
+
+    justify-content:center;
+
+    padding:18px;
+
+}
+.sidebar.close .menu span{
+
+    display:none;
+
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:25px 20px;
+    border-bottom:1px solid rgba(255,255,255,.15);
+}
+
+.logo-box{
+    width:44px;
+    height:44px;
+    border-radius:10px;
+    overflow:hidden;
+    border:2px solid rgba(255,255,255,.55);
+    background:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.logo-box img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    display:block;
+}
+
+.brand-text{
+    text-align:left;
+    flex:1;
+}
+
+.brand-text h3{
+    color:white;
+    font-size:16px;
+    font-weight:700;
+    margin-bottom:4px;
+}
+
+.brand-text small{
+    color:rgba(255,255,255,.75);
+    font-size:12px;
+}
+
+.hamburger{
+    width:42px;
+    height:42px;
+    border:none;
+    border-radius:12px;
+    background:rgba(255,255,255,.18);
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+}
+
+.hamburger i{
+    font-size:24px;
+}
+
+.nav{
+    display:flex;
+    flex-direction:column;
+    gap:3px;
+    margin-top:8px;
+}
+
+.nav a{
+    display:flex;
+    align-items:center;
+    gap:11px;
+    padding:10px 12px;
+    border-radius:10px;
+    color:rgba(255,255,255,0.9);
+    text-decoration:none;
+    font-size:13.5px;
+    font-weight:500;
+    transition:.15s ease;
+}
+
+.nav a:hover{
+    background:rgba(255,255,255,.12);
+    color:#fff;
+}
+
+.nav a.active{
+    background:rgba(255,255,255,.15);
+    color:#fff;
+    font-weight:600;
+}
+
+.nav-label{
+    font-size:10.5px;
+    text-transform:uppercase;
+    letter-spacing:.09em;
+    color:rgba(255,255,255,0.5);
+    margin:18px 12px 6px;
+}
+
+.sidebar-foot{
+    margin-top:auto;
+    padding:14px 12px;
+    border-radius:12px;
+    background:rgba(255,255,255,0.08);
+    font-size:11.5px;
+    color:rgba(255,255,255,0.8);
+    line-height:1.5;
+}
+
+.sidebar.close .brand-text h3,
+.sidebar.close .brand-text small{
+    display:none;
+}
+
+.sidebar.close .logo-box{
+    width:48px;
+    height:48px;
+}
+
+/* Logo */
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:25px 20px;
+    border-bottom:1px solid rgba(255,255,255,.15);
+}
+
+.logo-box{
+    width:44px;
+    height:44px;
+    border-radius:10px;
+    overflow:hidden;
+    border:2px solid rgba(255,255,255,.55);
+    background:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.logo-box img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    display:block;
+}
+
+.brand-text{
+    text-align:left;
+    flex:1;
+}
+
+.brand-text h3{
+    color:white;
+    font-size:16px;
+    font-weight:700;
+    margin-bottom:4px;
+}
+
+.brand-text small{
+    color:rgba(255,255,255,.75);
+    font-size:12px;
+}
+
+.hamburger{
+    width:42px;
+    height:42px;
+    border:none;
+    border-radius:12px;
+    background:rgba(255,255,255,.15);
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+}
+
+.hamburger i{
+    font-size:24px;
+}
+.logo{
+    padding:20px 20px;
+    border-bottom:1px solid rgba(255,255,255,.15);
+}
+
+.logo-header{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:12px;
+}
+
+.logo img{
+    width:40px;
+    height:40px;
+    object-fit:contain;
+    border-radius:10px;
+    border:2px solid rgba(255,255,255,.55);
+    background:#fff;
+    padding:4px;
+}
+
+.logo-text{
+    text-align:left;
+}
+
+.logo-text h3{
+    color:#fff;
+    font-size:16px;
+    font-weight:700;
+    margin-bottom:4px;
+}
+
+.logo-text small{
+    color:rgba(255,255,255,.75);
+    font-size:12px;
+}
+
+.hamburger{
+
+    width:42px;
+
+    height:42px;
+
+    border:none;
+
+    border-radius:8px;
+
+    background:rgba(255,255,255,.15);
+
+    color:white;
+
+    cursor:pointer;
+
+}
+
+.hamburger i{
+
+    font-size:24px;
+
+}
+
+/* Menu */
+
+.menu{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    padding:18px 28px;
+
+    color:white;
+
+    text-decoration:none;
+
+    transition:.3s;
+
+    font-size:17px;
+
+}
+
+.menu i{
+
+    font-size:22px;
+
+}
+
+.menu:hover{
+
+    background:rgba(255,255,255,.15);
+
+}
+
+.menu.active{
+
+    background:rgba(255,255,255,.15);
+
+}
+
+.bottom{
+
+    border-top:1px solid rgba(255,255,255,.15);
+
+    padding:20px 0;
+
+}
+
+.content{
+    margin-left:260px;
+    width:calc(100% - 260px);
+    padding:24px 12px 24px 0; /* remove left padding so content sits next to sidebar */
+    transition:.3s ease;
+}
+
+.content.full{
+
+    margin-left:80px;
+
+    width:calc(100% - 80px);
+
+}
+
+/* Dashboard-only: when sidebar is collapsed and content is 'full', keep dashboard paper fixed size */
+.content.full .paper-container.dashboard-page{
+    padding:16px;
+}
+
+.content.full .paper.dashboard-paper{
+    width:842px; /* A4 portrait width at 96dpi */
+    max-width:100%;
+    min-width:0;
+    margin:0 auto;
+    padding:28px;
+    box-shadow: none;
+}
+
+/* Hero */
+
+.hero{
+
+    background:white;
+
+    border-left:6px solid var(--gold);
+
+    border-radius:12px;
+
+    padding:35px;
+
+    margin-bottom:30px;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+
+}
+
+.hero h2{
+
+    color:var(--blue);
+
+    margin-bottom:15px;
+
+}
+
+.hero p{
+
+    color:#555;
+
+    line-height:1.8;
+
+}
+
+/* Card */
+
+.card-box{
+
+    background:white;
+
+    border-radius:12px;
+
+    padding:30px;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+
+    transition:.3s;
+
+    height:100%;
+
+}
+
+.card-box:hover{
+
+    transform:translateY(-5px);
+
+}
+
+.stat{
+
+    text-align:center;
+
+}
+
+.stat i{
+
+    color:var(--gold);
+
+    font-size:42px;
+
+}
+
+.stat h1{
+
+    color:var(--blue);
+
+    margin:15px 0;
+
+    font-size:50px;
+
+}
+
+.stat p{
+
+    color:#666;
+
+}
+
+/* Button */
+
+.btn-primary-custom{
+
+    background:var(--blue);
+
+    color:white;
+
+    border:none;
+
+}
+
+.btn-primary-custom:hover{
+
+    background:#1b4d88;
+
+    color:white;
+
+}
+
+/* Responsive */
+
+@media(max-width:768px){
+
+.sidebar{
+
+    width:220px;
+
+}
+
+/* Sidebar collapse */
+
+.sidebar.close{
+
+    width:80px;
+
+}
+
+.sidebar.close .logo img,
+.sidebar.close .logo-text,
+.sidebar.close .menu span{
+
+    display:none;
+
+}
+
+.sidebar.close .menu{
+
+    justify-content:center;
+
+}
+
+/* Konten ikut melebar */
+
+.logo img{
+
+    width:70px;
+
+}
+
+.logo h3{
+
+    font-size:26px;
+
+}
+
+.menu{
+
+    padding:16px 22px;
+
+    font-size:16px;
+
+}
+
+}
+.hamburger{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    width:42px;
+
+    height:42px;
+
+    margin:20px auto 0;
+
+    background:rgba(255,255,255,.15);
+
+    border:none;
+
+    border-radius:8px;
+
+    color:white;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.hamburger:hover{
+
+    background:rgba(255,255,255,.3);
+
+}
+
+.hamburger i{
+
+    font-size:24px;
+
+}
+.sidebar.close{
+
+    width:80px;
+
+}
+
+.sidebar.close .logo h3,
+.sidebar.close .logo small,
+.sidebar.close .menu span{
+
+    display:none;
+
+}
+
+.sidebar.close .menu{
+
+    justify-content:center;
+
+}
+.sidebar.close .logo img{
+
+    display:none;
+
+}
+
+.sidebar.close .logo-text{
+
+    display:none;
+
+}
+
+.sidebar.close .logo-header{
+
+    justify-content:center;
+
+}
+
+.sidebar.close .hamburger{
+
+    margin:auto;
+
+}

@@ -1,0 +1,372 @@
+/* ===========================
+   PAPER
+=========================== */
+
+.paper-container{
+
+    width:100%;
+    overflow-x:auto;
+    padding:20px;
+    display:flex;
+    justify-content:center;
+
+}
+
+/* Dashboard-specific: make paper use full available width and align left */
+.paper-container.dashboard-page{
+    justify-content:center;
+    padding-left:0;
+}
+
+
+.paper.dashboard-paper{
+    /* kembalikan ukuran kertas asli agar terlihat penuh */
+    width:794px;
+    min-width:794px;
+    margin:0; /* hapus margin kiri/kanan agar kertas menyentuh area konten */
+    padding:28px 16px; /* beri sedikit padding internal kanan/kiri */
+    box-shadow:none;
+}
+
+.paper-container{
+    scroll-behavior:smooth;
+    /* biarkan wrapping normal pada container; gunakan flex center untuk posisi tengah */
+    padding-left:24px; /* small left gap so paper isn't hidden by sidebar */
+}
+
+.paper{
+    display:block;
+    margin:0 auto;
+}
+
+/* Pastikan teks di dalam kertas membungkus normal meskipun container menggunakan nowrap */
+.paper, .paper * {
+    white-space: normal;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+.paper{
+
+    width:794px;
+
+    min-width:794px;
+
+    min-height:1123px;
+
+    background:#fff;
+
+    margin:auto;
+
+    padding:50px;
+
+    box-shadow:0 0 15px rgba(0,0,0,.15);
+
+}
+
+/* ===========================
+   HEADER
+=========================== */
+
+.kop{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:20px;
+}
+
+.kan-logo-block{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-end;
+    text-align:right;
+}
+
+.kan-logo-block img{
+    width:95px;
+}
+
+.kan-labels{
+    margin-top:8px;
+}
+
+.kan-labels p{
+    margin:0;
+    font-size:12px;
+    line-height:1.2;
+    font-weight:600;
+}
+
+.fmi-label{
+    margin-top:-14px;
+    text-align:right;
+    font-weight:700;
+    letter-spacing:0.15em;
+    margin-bottom:24px;
+}
+
+.kop img{
+
+    width:85px;
+
+}
+
+.kop-text{
+
+    text-align:center;
+
+}
+
+.kop-text{
+    text-align:center;
+    line-height:1.1;
+}
+
+.kop-text h5{
+    font-weight:bold;
+    font-size:20px;
+    margin-bottom:4px;
+    line-height:1.1;
+}
+
+.kop-text h6{
+    font-weight:bold;
+    font-size:14px;
+    margin-bottom:2px;
+    line-height:1.2;
+}
+
+.kop-text p{
+    font-size:12px;
+    margin:0;
+    line-height:1.2;
+}
+
+/* ===========================
+   GARIS
+=========================== */
+
+.garis1{
+
+    border:2px solid #000;
+
+    margin-top:20px;
+
+    margin-bottom:2px;
+
+}
+
+.garis2{
+
+    border:1px solid #000;
+
+    margin-bottom:35px;
+
+}
+
+/* ===========================
+   JUDUL
+=========================== */
+
+.judul{
+
+    text-align:center;
+
+    font-weight:bold;
+
+    text-decoration:underline;
+
+    margin-bottom:35px;
+
+}
+
+/* ===========================
+   FORM
+=========================== */
+
+table{
+
+    width:100%;
+
+}
+
+td{
+
+    padding:8px;
+
+}
+
+.form-control{
+
+    border:none;
+
+    border-bottom:1px solid #000;
+
+    border-radius:0;
+
+    box-shadow:none;
+
+}
+
+.form-control:focus{
+
+    border-bottom:2px solid #000;
+
+    box-shadow:none;
+
+}
+
+textarea{
+
+    resize:none;
+
+}
+
+/* ===========================
+   ISI
+=========================== */
+
+.isi{
+
+    margin-top:35px;
+
+    line-height:2;
+
+    text-align:justify;
+
+}
+
+ol{
+
+    margin-top:15px;
+
+}
+
+ol li{
+
+    margin-bottom:12px;
+
+}
+
+/* ===========================
+   CHECKBOX
+=========================== */
+
+.check{
+
+    margin-top:35px;
+
+}
+
+/* ===========================
+   TTD
+=========================== */
+
+.signature-area{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    margin-top:60px;
+
+}
+
+.ttd{
+
+    width:320px;
+
+    text-align:center;
+
+}
+
+canvas{
+
+    width:100%;
+
+    height:170px;
+
+    border:1px solid #000;
+
+    cursor:crosshair;
+
+}
+
+/* ===========================
+   BUTTON
+=========================== */
+
+.btn-black{
+
+    background:#000;
+
+    color:#fff;
+
+    border-radius:0;
+
+}
+
+.btn-black:hover{
+
+    background:#333;
+
+    color:#fff;
+
+}
+
+.btn-outline-dark{
+
+    border-radius:0;
+
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media(max-width:768px){
+
+.paper-container{
+
+    overflow-x:auto;
+
+}
+
+.paper{
+
+    min-width:794px;
+
+}
+
+}
+
+/* On medium/smaller viewports, align paper to start so left columns remain reachable */
+@media (max-width:1200px){
+    .paper-container.dashboard-page{
+        justify-content:flex-start;
+        padding-left:24px; /* keep small gap from sidebar */
+    }
+
+    .paper{
+        margin-left:0;
+    }
+}
+
+/* ===== Shift only the paper when sidebar is collapsed ===== */
+.paper.dashboard-paper{
+    transition:transform .24s ease;
+}
+
+/* sebelumnya ada transform untuk menggeser; sekarang scrolling JS mengatur pergeseran */
+
+/* ensure horizontal scrolling is available at bottom for narrow viewports */
+.paper-container{
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+}
+
+/* pan buttons removed */
