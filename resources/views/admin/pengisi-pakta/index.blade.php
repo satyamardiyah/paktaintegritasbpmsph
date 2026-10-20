@@ -94,9 +94,12 @@
 .btn-edit svg{ width:14px; height:14px; }
 
   .pagination-wrap{ padding:16px 22px; display:flex; justify-content:center; }
-  .pagination-wrap nav ul{ display:flex; gap:4px; list-style:none; padding:0; margin:0; }
-  .pagination-wrap a, .pagination-wrap span{ padding:6px 11px; border-radius:8px; font-size:12.5px; text-decoration:none; color:var(--ink); border:1px solid var(--border); }
-  .pagination-wrap .active span{ background:var(--blue-700); color:#fff; border-color:var(--blue-700); }
+  .pagination-wrap nav{ width:100%; }
+  .pagination-list{ display:flex; flex-wrap:wrap; justify-content:center; gap:6px; list-style:none; padding:0; margin:0; }
+  .pagination-link{ display:flex; align-items:center; justify-content:center; min-width:36px; height:36px; padding:0 10px; border:1px solid var(--border); border-radius:8px; background:#fff; color:var(--ink); font-size:13px; line-height:1; text-decoration:none; }
+  a.pagination-link:hover{ background:var(--blue-50); color:var(--blue-700); }
+  .pagination-link.is-active{ background:var(--blue-700); border-color:var(--blue-700); color:#fff; }
+  .pagination-link.is-disabled{ color:var(--muted); background:var(--blue-50); }
 
   @media (max-width: 760px){
     .main{ padding:16px 12px 32px; }
@@ -148,7 +151,7 @@
       </div>
 
       <div class="pagination-wrap" id="pakta-pagination">
-        {{ $paktas->links() }}
+        {{ $paktas->links('admin.pengisi-pakta.pagination') }}
       </div>
     </div>
 

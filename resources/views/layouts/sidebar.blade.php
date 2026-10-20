@@ -68,17 +68,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     hamburger.addEventListener("click", function () {
-        const wasClosed = sidebar.classList.contains("close");
-
         sidebar.classList.toggle("close");
         if (content) {
             content.classList.toggle("full");
-        }
-
-        const paperContainer = document.querySelector(".paper-container.dashboard-page");
-        if (paperContainer && !window.matchMedia("(max-width: 768px)").matches) {
-            const shift = wasClosed ? 180 : -180;
-            paperContainer.scrollBy({ left: shift, behavior: "smooth" });
         }
     });
 });

@@ -324,7 +324,7 @@ public function pengisiPakta(Request $request)
     if ($request->ajax()) {
         return response()->json([
             'rows'       => view('admin.pengisi-pakta.rows', compact('paktas'))->render(),
-            'pagination' => $paktas->links()->toHtml(),
+            'pagination' => $paktas->links('admin.pengisi-pakta.pagination')->toHtml(),
         ]);
     }
 

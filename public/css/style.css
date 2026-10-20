@@ -976,3 +976,119 @@ body{
             display: inline;
         }
     }
+
+/* Keep the same collapsible navbar layout at every screen size. */
+.sidebar,
+.sidebar.close {
+    position: sticky;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    min-height: 0;
+    padding: 0 16px;
+    box-sizing: border-box;
+}
+
+.sidebar > div:first-child {
+    display: contents;
+}
+
+.sidebar .brand,
+.sidebar.close .brand {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    width: 100%;
+    min-height: 76px;
+    padding: 12px 20px;
+}
+
+.sidebar .hamburger,
+.sidebar.close .hamburger {
+    display: flex;
+    flex: 0 0 54px;
+    align-items: center;
+    justify-content: center;
+    width: 54px;
+    height: 54px;
+    margin: 0 0 0 auto;
+}
+
+.sidebar .nav,
+.sidebar.close .nav,
+.sidebar .bottom,
+.sidebar.close .bottom {
+    display: none;
+    flex: 0 0 auto;
+    flex-direction: column;
+    align-items: stretch;
+    width: calc(100% + 32px);
+    margin: 0 -16px;
+    padding: 8px 20px 14px;
+    box-sizing: border-box;
+    background: #fff;
+    box-shadow: 0 8px 14px rgba(0, 0, 0, .12);
+}
+
+.sidebar .nav,
+.sidebar.close .nav {
+    gap: 4px;
+}
+
+.sidebar .bottom,
+.sidebar.close .bottom {
+    padding-top: 0;
+}
+
+.sidebar.close .nav,
+.sidebar.close .bottom {
+    display: flex;
+}
+
+.sidebar .nav .menu,
+.sidebar.close .nav .menu,
+.sidebar .bottom .menu,
+.sidebar.close .bottom .menu {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    color: #343a40;
+    font-size: 14px;
+    text-align: left;
+    white-space: normal;
+}
+
+.sidebar .nav .menu span,
+.sidebar.close .nav .menu span,
+.sidebar .bottom .menu span,
+.sidebar.close .bottom .menu span {
+    display: inline;
+}
+
+.sidebar .nav .menu:hover,
+.sidebar.close .nav .menu:hover,
+.sidebar .nav .menu.active,
+.sidebar.close .nav .menu.active,
+.sidebar .bottom .menu:hover,
+.sidebar.close .bottom .menu:hover {
+    background: #e8eef6;
+    color: #3266a8;
+}
+
+.sidebar.close {
+    align-items: stretch;
+}
+
+.sidebar.close .brand-text h3,
+.sidebar.close .brand-text small {
+    display: block;
+}
