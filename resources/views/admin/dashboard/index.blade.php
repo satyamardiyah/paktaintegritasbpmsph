@@ -6,6 +6,7 @@
 <title>Dashboard Admin — Pakta Integritas BPMSPH</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ asset('css/admin-navbar.css') }}">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 <style>
   :root{
@@ -117,22 +118,6 @@
   .admin-chip .who .n{ font-size:12.5px; font-weight:600; }
   .admin-chip .who .r{ font-size:10.5px; color:var(--muted); }
 
-  .live-badge{
-    display:inline-flex; align-items:center; gap:6px;
-    font-size:11px; font-weight:600; color:var(--green);
-    background:var(--green-bg); padding:3px 10px 3px 8px; border-radius:999px;
-  }
-  .live-dot{
-    width:7px; height:7px; border-radius:50%; background:var(--green);
-    animation:pulse 1.6s ease-in-out infinite;
-  }
-  @keyframes pulse{
-    0%{ box-shadow:0 0 0 0 rgba(23,166,115,0.55); }
-    70%{ box-shadow:0 0 0 6px rgba(23,166,115,0); }
-    100%{ box-shadow:0 0 0 0 rgba(23,166,115,0); }
-  }
-  .last-updated{ font-size:11.5px; color:var(--muted); }
-
   .stats{ display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:22px; }
   .stat-card{
     background:var(--white); border:1px solid var(--border); border-radius:var(--radius);
@@ -168,6 +153,9 @@
   .tabs button.active{ background:var(--blue-700); color:var(--white); }
   .chart-wrap{ height:230px; }
   .chart-wrap.small{ height:210px; }
+  .score-chart-wrap{ height:300px; }
+  .score-summary{ margin:12px 0 0; font-size:13px; font-weight:600; color:var(--blue-700); }
+  .score-summary.empty{ font-weight:400; color:var(--muted); }
 
   .legend-row{ display:flex; gap:16px; margin-top:12px; flex-wrap:wrap; }
   .legend-item{ display:flex; align-items:center; gap:7px; font-size:11.5px; color:var(--muted); }
@@ -191,13 +179,14 @@
     to{ background:transparent; }
   }
   .name-cell{ display:flex; align-items:center; gap:10px; }
+  .name-details{ flex:1; min-width:0; }
   .mini-avatar{
     width:28px; height:28px; border-radius:50%; background:var(--blue-100); color:var(--blue-700);
     font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:11px;
     display:flex; align-items:center; justify-content:center; flex-shrink:0;
   }
-  .name-main{ font-weight:600; font-size:13px; }
-  .name-sub{ font-size:11px; color:var(--muted); }
+  .name-main{ font-weight:600; font-size:13px; line-height:1.35; overflow-wrap:anywhere; }
+  .name-sub{ margin-top:3px; font-size:11px; line-height:1.3; color:var(--muted); overflow-wrap:anywhere; }
   .addr-cell{ max-width:190px; }
   .addr-main{ font-weight:600; font-size:12.5px; }
   .addr-sub{ font-size:11px; color:var(--muted); margin-top:2px; line-height:1.4; }
@@ -215,58 +204,40 @@
     .stats{ grid-template-columns:repeat(2,1fr); }
   }
   @media (max-width: 760px){
-    .sidebar{ display:none; }
-    .main{ padding:20px; }
-    .stats{ grid-template-columns:1fr 1fr; }
+    .main{ padding:16px 12px 32px; }
+    .main > *{ width:100%; max-width:100%; min-width:0; }
+    .stats{ grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+    .stat-card{ min-width:0; padding:14px 12px; }
+    .stat-card .val{ font-size:22px; overflow-wrap:anywhere; }
+    .stat-card .lbl{ font-size:11px; }
+    .panels{ width:100%; min-width:0; grid-template-columns:minmax(0,1fr) !important; gap:12px; }
+    .panel, .table-panel{ width:100%; min-width:0; }
+    .panel{ padding:16px 14px; }
+    .panel-head{ flex-wrap:wrap; }
+    .tabs{ max-width:100%; }
+    .tabs button{ padding:6px 8px; font-size:10.5px; }
+    .chart-wrap, .chart-wrap.small{ width:100%; min-width:0; height:210px; }
+    .score-chart-wrap{ height:280px; }
+    .table-scroll{ width:100%; max-width:100%; overflow-x:auto; }
+    .topbar{ align-items:flex-start; flex-wrap:wrap; gap:12px; }
+    .topbar h1{ font-size:18px; }
+  }
+
+  @media (max-width: 380px){
+    .stats{ grid-template-columns:minmax(0,1fr); }
+    .admin-chip{ padding-right:10px; }
   }
 </style>
 </head>
 <body>
+@include('admin.layouts.navbar')
 <div class="layout">
-
-  <aside class="sidebar">
-    <div class="brand">
-      <div class="logo-box">
-        <img src="{{ asset('img/logo-bpmsph.jpeg') }}" alt="Logo BPMSPH">
-      </div>
-      <div class="brand-text">
-        <div class="name">BPMSPH</div>
-        <div class="sub">Pakta Integritas</div>
-      </div>
-    </div>
-
-    <div class="nav-label">Menu Utama</div>
-    <nav class="nav">
-      <a href="#" class="active">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
-        Dashboard
-      </a>
-      <a href="pengisi-pakta">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="m9 15 2 2 4-4"/></svg>
-        Pengisi Pakta
-      </a>
-
-      <div class="nav-label">Sistem</div>
-      <a href="{{ route('admin.logout.confirm') }}">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-        Keluar
-      </a>
-    </nav>
-
-    <div class="sidebar-foot">
-      Balai Pengujian Mutu dan Sertifikasi Produk Hewan — Sistem Pakta Integritas Digital.
-    </div>
-  </aside>
 
   <main class="main">
 
     <div class="topbar">
       <div>
         <h1>Dashboard Admin</h1>
-        <p class="desc">
-          <span class="live-badge"><span class="live-dot"></span> LIVE</span>
-          <span class="last-updated" id="lastUpdated">Memuat data…</span>
-        </p>
       </div>
       <div class="admin-chip">
         <div class="avatar">AD</div>
@@ -344,6 +315,48 @@
       </div>
     </div>
 
+    <div class="panels" style="grid-template-columns:1fr;">
+      <div class="panel">
+        <div class="panel-head">
+          <div>
+            <h2>Nilai Penilaian per Kategori</h2>
+            <p>Rata-rata skor dari kriteria yang telah dinilai admin (skala 1–3)</p>
+          </div>
+        </div>
+        <div class="chart-wrap score-chart-wrap"><canvas id="chartCategoryScores"></canvas></div>
+        <p class="score-summary empty" id="topRatedCategory">Belum ada data penilaian.</p>
+      </div>
+    </div>
+
+    <div class="panels" style="grid-template-columns:1fr;">
+      <div class="panel">
+        <div class="panel-head">
+          <div>
+            <h2>Rekapitulasi Hasil Penilaian</h2>
+            <p>Rata-rata nilai akhir berdasarkan kategori kepentingan</p>
+          </div>
+        </div>
+
+        <div class="table-scroll">
+          <table style="width:100%; min-width:650px;">
+            <thead>
+              <tr>
+                <th>Kategori Kepentingan</th>
+                <th>Jumlah Dinilai</th>
+                <th>Rata-rata Nilai Akhir</th>
+                <th>Hasil</th>
+              </tr>
+            </thead>
+            <tbody id="rekapPenilaianBody">
+              <tr>
+                <td colspan="4">Memuat data penilaian...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
 
   </main>
 </div>
@@ -376,11 +389,21 @@ const KEPENTINGAN_MAP = KEPENTINGAN.reduce((acc, item) => {
   acc[item.label] = item;
   return acc;
 }, {});
+const KATEGORI_REKAP = [
+  'Pengguna Jasa Pengujian',
+  'Penyedia Barang/Jasa',
+  'Magang/PKL',
+  'Pengguna Sewa Gedung',
+  'Auditor',
+  'Pengguna Jasa Uji Profesi'
+];
 
 let chartKunjungan = null;
 let chartUnit = null;
 let chartTren = null;
+let chartCategoryScores = null;
 let stats = { total_kunjungan: 0, total_pengisi: 0, hari_ini: 0 };
+let daftarHasilPenilaian = [];
 let kunjunganViews = { harian: { labels: [], values: [] }, mingguan: { labels: [], values: [] }, bulanan: { labels: [], values: [] } };
 let currentView = 'harian';
 let trenLabels = [];
@@ -388,6 +411,8 @@ let trenPengunjung = [];
 let trenPengisi = [];
 let latestRows = [];
 let kepentinganData = [0, 0, 0, 0, 0, 0];
+let categoryScoreRows = [];
+let topRatedCategories = [];
 
 function pad(n) {
   return n.toString().padStart(2, '0');
@@ -456,10 +481,12 @@ function fetchStats() {
 
       kepentinganData = KEPENTINGAN.map(item => data.kepentingan[item.label] || 0);
       latestRows = transformLatestRows(data.latest_rows);
+      categoryScoreRows = data.category_scores || [];
+      daftarHasilPenilaian = data.daftar_hasil_penilaian || [];
+      renderRekapPenilaian(data.rekap_penilaian || []);
+      topRatedCategories = data.top_rated_categories || [];
 
       renderAll();
-      const updatedAt = data.updated_at ? 'Diperbarui ' + data.updated_at : document.getElementById('lastUpdated').innerText;
-      document.getElementById('lastUpdated').innerText = updatedAt;
     })
     .catch(error => {
       console.error(error);
@@ -514,6 +541,48 @@ function initCharts() {
     data: { labels: [], datasets: [ { label: 'Pengunjung', data: [], backgroundColor: COLORS.blue100, borderRadius: 6, maxBarThickness: 34 }, { label: 'Pengisi Pakta', data: [], backgroundColor: COLORS.blue700, borderRadius: 6, maxBarThickness: 34 } ] },
     options: { responsive: true, maintainAspectRatio: false, animation: { duration: 400 }, plugins: { legend: { position: 'top', align: 'end', labels: { usePointStyle: true, boxWidth: 8 } }, tooltip: { backgroundColor: COLORS.blue900 } }, scales: { x: { grid: { display: false } }, y: { beginAtZero: true, grid: { color: '#EAF3FC' } } } }
   });
+
+  chartCategoryScores = new Chart(document.getElementById('chartCategoryScores'), {
+    type: 'bar',
+    data: { labels: [], datasets: [{
+      label: 'Rata-rata skor',
+      data: [],
+      backgroundColor: [],
+      borderRadius: 6,
+      maxBarThickness: 30
+    }] },
+    options: {
+      indexAxis: 'y',
+      responsive: true,
+      maintainAspectRatio: false,
+      animation: { duration: 400 },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: COLORS.blue900,
+          callbacks: {
+            label: context => {
+              const value = Number(context.raw);
+              return `Rata-rata: ${value.toFixed(2)} (${scoreLevel(value)})`;
+            }
+          }
+        }
+      },
+      scales: {
+        x: {
+          min: 0,
+          max: 3,
+          ticks: {
+            stepSize: 1,
+            callback: value => ({ 1: 'Rendah', 2: 'Sedang', 3: 'Tinggi' }[value] || '')
+          },
+          grid: { color: '#EAF3FC' }
+        },
+        y: { grid: { display: false } }
+      }
+    }
+  });
+
 }
 
 function renderAll() {
@@ -521,6 +590,7 @@ function renderAll() {
   updateKunjunganChart();
   updateUnitChart();
   updateTrendChart();
+  updateCategoryScoreChart();
   updateTable();
 }
 
@@ -581,19 +651,86 @@ function updateTrendChart() {
   chartTren.update();
 }
 
+function scoreLevel(value) {
+  if (value >= 2.5) return 'Tinggi';
+  if (value >= 1.5) return 'Sedang';
+  return 'Rendah';
+}
+
+function updateCategoryScoreChart() {
+  const highest = categoryScoreRows.reduce((max, row) => Math.max(max, row.average), 0);
+  chartCategoryScores.data.labels = categoryScoreRows.map(row => row.label);
+  chartCategoryScores.data.datasets[0].data = categoryScoreRows.map(row => row.average);
+  chartCategoryScores.data.datasets[0].backgroundColor = categoryScoreRows.map(row =>
+    topRatedCategories.includes(row.label) ? '#17A673' : COLORS.blue500
+  );
+  chartCategoryScores.update();
+
+  const summary = document.getElementById('topRatedCategory');
+  if (topRatedCategories.length === 0) {
+    summary.textContent = 'Belum ada data penilaian.';
+    summary.classList.add('empty');
+    return;
+  }
+
+  summary.textContent = `Nilai tertinggi: ${topRatedCategories.join(', ')} — ${highest.toFixed(2)}/3 (${scoreLevel(highest)})`;
+  summary.classList.remove('empty');
+}
+
+function renderRekapPenilaian(data) {
+  const tbody = document.getElementById('rekapPenilaianBody');
+  if (!tbody) return;
+
+  tbody.replaceChildren();
+
+  KATEGORI_REKAP.forEach(kategori => {
+    const item = data.find(row => row.kategori === kategori);
+    const jumlah = Number(item?.jumlah_dinilai ?? 0);
+    const rataRata = item?.rata_rata;
+
+    let nilai = '—';
+    let hasil = '—';
+
+    if (jumlah > 0 && rataRata !== null && rataRata !== undefined) {
+      const skor = Number(rataRata);
+
+      nilai = skor.toLocaleString('id-ID', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
+
+      hasil = skor >= 80
+        ? 'Tinggi'
+        : skor >= 60
+          ? 'Sedang'
+          : 'Rendah';
+    }
+
+    const tr = document.createElement('tr');
+
+    [kategori, jumlah, nilai, hasil].forEach(teks => {
+      const td = document.createElement('td');
+      td.textContent = teks;
+      tr.appendChild(td);
+    });
+
+    tbody.appendChild(tr);
+  });
+}
+
 function updateTable() {
   const tbody = document.getElementById('tableBody');
   tbody.innerHTML = '';
   latestRows.forEach(row => {
     const initials = row.nama.split(' ').map(word => word[0]).slice(0, 2).join('').toUpperCase();
     const kepentingan = typeof row.kepentingan === 'string' ? (KEPENTINGAN_MAP[row.kepentingan] || { color: COLORS.blue700, bg: '#EAF3FC', label: row.kepentingan }) : row.kepentingan;
-    const badge = row.status === 'done' ? '<span class="badge done">✓ Terverifikasi</span>' : '<span class="badge pending">● Menunggu</span>';
+    const badge = '<span class="badge done">✓ Terverifikasi</span>';
     const tr = document.createElement('tr');
     tr.innerHTML = `
       <td>
         <div class="name-cell">
           <div class="mini-avatar">${initials}</div>
-          <div>
+          <div class="name-details">
             <div class="name-main">${row.nama}</div>
             <div class="name-sub">${row.jabatan}</div>
           </div>

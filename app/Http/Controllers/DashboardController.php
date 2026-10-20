@@ -8,18 +8,11 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    /**
-     * Tampilkan halaman dashboard.
-     */
     public function index()
     {
         return view('dashboard-user.index');
     }
 
-    /**
-     * Endpoint JSON yang dipanggil AJAX secara berkala (polling)
-     * untuk update grafik & angka secara "real-time".
-     */
     public function stats()
     {
         $totalPengunjung = Pengunjung::count();

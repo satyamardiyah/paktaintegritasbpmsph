@@ -641,3 +641,338 @@ body{
     margin:auto;
 
 }
+
+/* Shared navigation bar */
+.wrapper {
+    display: block;
+}
+
+.sidebar,
+.sidebar.close {
+    position: sticky;
+    top: 0;
+    left: auto;
+    z-index: 1000;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: auto;
+    min-height: 64px;
+    padding: 0 16px;
+    background: var(--blue);
+}
+
+.sidebar > div:first-child {
+    display: contents;
+}
+
+.sidebar .brand {
+    flex: 0 0 auto;
+    min-height: 64px;
+    padding: 8px 12px 8px 0;
+    border: 0;
+}
+
+.sidebar .brand-text,
+.sidebar.close .brand-text {
+    display: block;
+}
+
+.sidebar .logo-box,
+.sidebar.close .logo-box {
+    display: flex;
+    width: 40px;
+    height: 40px;
+}
+
+.sidebar .hamburger,
+.sidebar.close .hamburger {
+    display: flex;
+    flex: 0 0 42px;
+    margin: 0 0 0 12px;
+}
+
+.sidebar .nav-label {
+    display: none;
+}
+
+.sidebar .nav,
+.sidebar.close .nav {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: row;
+    justify-content: center;
+    gap: 6px;
+    min-width: 0;
+    margin: 0;
+    padding: 0 8px;
+}
+
+.sidebar .menu,
+.sidebar.close .menu {
+    justify-content: center;
+    gap: 8px;
+    min-width: 0;
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+.sidebar .menu i {
+    font-size: 17px;
+}
+
+.sidebar .bottom,
+.sidebar.close .bottom {
+    display: flex;
+    flex: 0 0 auto;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.sidebar .sidebar-foot {
+    display: none;
+}
+
+.sidebar.close .nav,
+.sidebar.close .bottom {
+    display: none;
+}
+
+.content,
+.content.full {
+    width: 100%;
+    margin: 0;
+    padding: 24px 12px;
+}
+
+@media (max-width: 768px) {
+    .sidebar,
+    .sidebar.close {
+        position: sticky;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        min-height: 60px;
+        padding: 0 12px;
+    }
+
+    .sidebar .brand {
+        flex: 1 1 100%;
+        min-height: 60px;
+        padding: 8px 0;
+    }
+
+    .sidebar .nav,
+    .sidebar.close .nav {
+        flex: 0 0 100%;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: flex-start;
+        gap: 0;
+        margin: 0 -12px;
+        padding: 8px 16px;
+        background: #fff;
+        box-shadow: 0 8px 14px rgba(0, 0, 0, .12);
+    }
+
+    .sidebar.close .nav {
+        display: flex;
+    }
+
+    .sidebar .nav .menu,
+    .sidebar.close .nav .menu {
+        flex: 0 0 auto;
+        justify-content: flex-start;
+        gap: 10px;
+        width: 100%;
+        padding: 10px 8px;
+        border-radius: 0;
+        color: #333;
+        font-size: 14px;
+        text-align: left;
+        white-space: normal;
+    }
+
+    .sidebar.close .nav .menu span {
+        display: inline;
+    }
+
+    .sidebar .nav .menu:hover,
+    .sidebar.close .nav .menu:hover,
+    .sidebar .nav .menu.active,
+    .sidebar.close .nav .menu.active {
+        background: rgba(46, 101, 171, .1);
+        color: var(--blue);
+    }
+
+    .sidebar.close .brand-text h3,
+    .sidebar.close .brand-text small {
+        display: block;
+    }
+
+    .sidebar .bottom,
+    .sidebar.close .bottom {
+        flex: 0 0 100%;
+        display: none;
+        margin: 0 -12px;
+        padding: 0 16px 8px;
+        background: #fff;
+    }
+
+    .sidebar.close .bottom {
+        display: flex;
+    }
+
+    .sidebar .bottom .menu,
+    .sidebar.close .bottom .menu {
+        justify-content: flex-start;
+        width: 100%;
+        padding: 10px 8px;
+        border-radius: 0;
+        color: #333;
+        font-size: 14px;
+    }
+
+    .sidebar .bottom .menu:hover,
+    .sidebar.close .bottom .menu:hover {
+        background: rgba(46, 101, 171, .1);
+        color: var(--blue);
+    }
+
+    .sidebar.close {
+        align-items: center;
+    }
+
+    .sidebar.close .brand {
+        flex-basis: 100%;
+    }
+
+    .content,
+    .content.full {
+        padding: 12px 8px;
+    }
+}
+
+    /* Perapihan navbar dan sidebar */
+    .sidebar {
+        box-sizing: border-box;
+    }
+
+    .sidebar .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 16px 20px;
+    }
+
+    .sidebar .logo-box img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+
+    .sidebar .logo-box,
+    .sidebar.close .logo-box {
+        flex: 0 0 80px;
+        width: 80px;
+        height: 48px;
+        border-radius: 12px;
+    }
+
+    .sidebar .brand-text h3 {
+        margin: 0;
+        font-size: 20px;
+        font-weight: 700;
+    }
+
+    .sidebar .brand-text small {
+        display: block;
+        margin-top: 3px;
+        font-size: 14px;
+    }
+
+    .sidebar .hamburger {
+        margin-left: auto;
+        flex-shrink: 0;
+        border: 0;
+        border-radius: 12px;
+        padding: 12px 15px;
+        background: rgba(255, 255, 255, 0.22);
+        color: #fff;
+        cursor: pointer;
+    }
+
+    .sidebar .nav {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        padding: 12px;
+    }
+
+    .sidebar .nav .menu {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 14px 16px;
+        border-radius: 8px;
+        text-decoration: none;
+        color: #343a40;
+        font-weight: 600;
+        transition: background-color 0.2s ease;
+    }
+
+    .sidebar .nav .menu i {
+        font-size: 20px;
+        flex-shrink: 0;
+    }
+
+    .sidebar .nav .menu:hover,
+    .sidebar .nav .menu.active {
+        background: #e8eef6;
+        color: #3266a8;
+    }
+
+    @media (max-width: 768px) {
+        .sidebar {
+            width: 100%;
+            max-width: 100%;
+        }
+
+        .sidebar .brand {
+            padding: 14px 20px;
+        }
+
+        .sidebar .nav .menu {
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .sidebar:not(.close) .nav,
+        .sidebar:not(.close) .bottom {
+            display: none;
+        }
+
+        .sidebar.close .nav {
+            display: flex;
+        }
+
+        .sidebar.close .bottom {
+            display: flex;
+        }
+
+        .sidebar.close .nav,
+        .sidebar.close .bottom {
+            flex-basis: calc(100% + 24px);
+            width: calc(100% + 24px);
+            box-sizing: border-box;
+        }
+
+        .sidebar.close .bottom .menu span {
+            display: inline;
+        }
+    }

@@ -35,24 +35,6 @@
             margin-bottom: 24px;
         }
         .header h1 { font-size: 22px; margin: 0; }
-        .live-badge {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 13px;
-            color: var(--abu);
-        }
-        .dot {
-            width: 8px; height: 8px;
-            background: var(--hijau);
-            border-radius: 50%;
-            animation: pulse 1.5s infinite;
-        }
-        @keyframes pulse {
-            0%   { opacity: 1; }
-            50%  { opacity: .3; }
-            100% { opacity: 1; }
-        }
         .cards {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -125,10 +107,6 @@
 
     <div class="header">
         <h1>Dashboard Pengunjung & Pakta Integritas</h1>
-        <div class="live-badge">
-            <span class="dot"></span>
-            Live &middot; update terakhir: <span id="updatedAt">-</span>
-        </div>
     </div>
 
     <div class="cards">
@@ -226,8 +204,6 @@
                 document.getElementById('totalPengunjung').textContent = data.total_pengunjung.toLocaleString('id-ID');
                 document.getElementById('totalPakta').textContent = data.total_pakta.toLocaleString('id-ID');
                 document.getElementById('persentase').textContent = data.persentase + '%';
-                document.getElementById('updatedAt').textContent = data.updated_at;
-
                 lineChart.data.labels = data.labels;
                 lineChart.data.datasets[0].data = data.pengunjung;
                 lineChart.data.datasets[1].data = data.pakta;
@@ -251,25 +227,5 @@
     </div>
 </main>
 </div>
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-
-    const hamburger = document.getElementById("hamburger");
-    const sidebar = document.getElementById("sidebar");
-    const content = document.querySelector(".content");
-
-    if(hamburger){
-
-        hamburger.addEventListener("click", function(){
-
-            sidebar.classList.toggle("close");
-            content.classList.toggle("full");
-
-        });
-
-    }
-
-});
-</script>
 </body>
 </html>

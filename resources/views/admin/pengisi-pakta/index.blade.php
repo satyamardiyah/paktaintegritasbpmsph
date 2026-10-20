@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pengisi Pakta — Dashboard Admin BPMSPH</title>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ asset('css/admin-navbar.css') }}">
 <style>
   :root{
     --blue-900:#0B3D78; --blue-700:#0B4F9E; --blue-500:#2E7DD1;
@@ -51,15 +52,18 @@
   .table-panel{ background:var(--white); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden; }
   .table-scroll{ overflow-x:auto; }
   table{ width:100%; min-width:920px; border-collapse:collapse; }
-  thead th{ text-align:left; font-size:10.5px; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); font-weight:600; padding:11px 22px; border-bottom:1px solid var(--border); background:var(--blue-50); white-space:nowrap; }
-  tbody td{ padding:13px 22px; font-size:13px; border-bottom:1px solid var(--border); vertical-align:top; }
+  thead th{ text-align:center; font-size:10.5px; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); font-weight:600; padding:11px 22px; border-bottom:1px solid var(--border); background:var(--blue-50); white-space:nowrap; }
+  tbody td{ padding:13px 22px; font-size:13px; border-bottom:1px solid var(--border); vertical-align:middle; text-align:center; }
+  thead th:nth-child(8), tbody td:nth-child(8){ min-width:120px; }
+  thead th:nth-child(9), tbody td:nth-child(9){ min-width:150px; }
   tbody tr:last-child td{ border-bottom:none; }
   tbody tr:hover{ background:var(--blue-50); }
-  .name-cell{ display:flex; align-items:center; gap:10px; }
+  .name-cell{ display:flex; align-items:center; justify-content:flex-start; gap:10px; text-align:left; }
   .mini-avatar{ width:28px; height:28px; border-radius:50%; background:var(--blue-100); color:var(--blue-700); font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:11px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
-  .name-main{ font-weight:600; font-size:13px; }
-  .name-sub{ font-size:11px; color:var(--muted); }
-  .addr-cell{ max-width:190px; }
+  .name-details{ flex:1; min-width:0; }
+  .name-main{ font-weight:600; font-size:13px; line-height:1.35; overflow-wrap:anywhere; }
+  .name-sub{ margin-top:3px; font-size:11px; line-height:1.3; color:var(--muted); overflow-wrap:anywhere; }
+  .addr-cell{ max-width:190px; margin:0 auto; }
   .addr-main{ font-weight:600; font-size:12.5px; }
   .addr-sub{ font-size:11px; color:var(--muted); margin-top:2px; line-height:1.4; }
   .email-cell{ font-size:12.5px; color:var(--blue-700); }
@@ -68,50 +72,45 @@
   .mono{ font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:var(--muted); }
   .dl-link{ font-size:11.5px; color:var(--blue-700); text-decoration:none; font-weight:600; }
   .dl-link:hover{ text-decoration:underline; }
+  .action-group{ display:flex; align-items:center; justify-content:center; gap:8px; white-space:nowrap; }
+  .sep{ color:var(--border); font-size:11px; }
+
+  .btn-add{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:28px; height:28px; border-radius:8px;
+  background:var(--blue-700); color:#fff;
+  font-size:16px; font-weight:700; text-decoration:none;
+  transition:background .15s ease;
+}
+.btn-add:hover{ background:var(--blue-900); }
+.btn-edit{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:28px; height:28px; border-radius:8px;
+  background:var(--green); color:#fff;
+  text-decoration:none;
+  transition:background .15s ease;
+}
+.btn-edit:hover{ background:#128c60; }
+.btn-edit svg{ width:14px; height:14px; }
 
   .pagination-wrap{ padding:16px 22px; display:flex; justify-content:center; }
   .pagination-wrap nav ul{ display:flex; gap:4px; list-style:none; padding:0; margin:0; }
   .pagination-wrap a, .pagination-wrap span{ padding:6px 11px; border-radius:8px; font-size:12.5px; text-decoration:none; color:var(--ink); border:1px solid var(--border); }
   .pagination-wrap .active span{ background:var(--blue-700); color:#fff; border-color:var(--blue-700); }
 
-  @media (max-width: 760px){ .sidebar{ display:none; } .main{ padding:20px; } }
+  @media (max-width: 760px){
+    .main{ padding:16px 12px 32px; }
+    .topbar h1{ font-size:18px; }
+    .search-box{ width:100%; max-width:none; }
+    .table-scroll{ width:100%; max-width:100%; overflow-x:auto; }
+    .pagination-wrap{ padding:12px 8px; overflow-x:auto; }
+    .pagination-wrap nav ul{ flex-wrap:wrap; justify-content:center; }
+  }
 </style>
 </head>
 <body>
+@include('admin.layouts.navbar')
 <div class="layout">
-
-  <aside class="sidebar">
-    <div class="brand">
-      <div class="logo-box">
-        <img src="{{ asset('img/logo-bpmsph.jpeg') }}" alt="Logo BPMSPH">
-      </div>
-      <div class="brand-text">
-        <div class="name">BPMSPH</div>
-        <div class="sub">Pakta Integritas</div>
-      </div>
-    </div>
-
-    <div class="nav-label">Menu Utama</div>
-    <nav class="nav">
-      <a href="{{ route('admin.dashboard') }}">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
-        Dashboard
-      </a>
-      <a href="{{ route('admin.pengisi-pakta') }}" class="active">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="m9 15 2 2 4-4"/></svg>
-        Pengisi Pakta
-      </a>
-            <div class="nav-label">Sistem</div>
-      <a href="{{ route('admin.logout.confirm') }}">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-        Keluar
-      </a>
-    </nav>
-
-    <div class="sidebar-foot">
-      Balai Pengujian Mutu dan Sertifikasi Produk Hewan — Sistem Pakta Integritas Digital.
-    </div>
-  </aside>
 
   <main class="main">
     <div class="topbar">
@@ -139,55 +138,62 @@
             <th>No. Referensi</th>
             <th>Status</th>
             <th>PDF</th>
+            <th>Penilaian</th>
           </tr>
         </thead>
-        <tbody>
-          @forelse($paktas as $pakta)
-            @php
-              $initials = collect(explode(' ', $pakta->nama))->map(fn($w) => $w[0] ?? '')->take(2)->implode('');
-            @endphp
-            <tr>
-              <td>
-                <div class="name-cell">
-                  <div class="mini-avatar">{{ strtoupper($initials) }}</div>
-                  <div>
-                    <div class="name-main">{{ $pakta->nama }}</div>
-                    <div class="name-sub">{{ $pakta->jabatan }}</div>
-                  </div>
-                </div>
-              </td>
-              <td>
-                <div class="addr-cell">
-                  <div class="addr-main">{{ $pakta->instansi }}</div>
-                  <div class="addr-sub">{{ $pakta->alamat }}</div>
-                </div>
-              </td>
-              <td class="email-cell">{{ $pakta->email }}</td>
-              <td><span class="badge" style="color:#0B4F9E; background:#EAF3FC">{{ $pakta->kepentingan }}</span></td>
-              <td>{{ $pakta->created_at->translatedFormat('d M Y H:i') }}</td>
-              <td class="mono">{{ $pakta->ref_number }}</td>
-              <td><span class="badge done">✓ Terverifikasi</span></td>
-              <td>
-                @if($pakta->pdf_path)
-                  <a class="dl-link" href="{{ route('admin.pakta.download', $pakta->id) }}">Unduh</a>
-                @else
-                  —
-                @endif
-              </td>
-            </tr>
-          @empty
-            <tr><td colspan="8" style="text-align:center; color:var(--muted); padding:30px;">Belum ada data.</td></tr>
-          @endforelse
+        <tbody id="pakta-tbody">
+          @include('admin.pengisi-pakta.rows', ['paktas' => $paktas])
         </tbody>
       </table>
       </div>
 
-      <div class="pagination-wrap">
+      <div class="pagination-wrap" id="pakta-pagination">
         {{ $paktas->links() }}
       </div>
     </div>
 
   </main>
-</div>
+</div>  <script>
+    (function () {
+      const searchInput = document.querySelector('.search-box input[name="search"]');
+      const tbody = document.getElementById('pakta-tbody');
+      const paginationWrap = document.getElementById('pakta-pagination');
+      const baseUrl = "{{ route('admin.pengisi-pakta') }}";
+      let debounceTimer = null;
+
+      function fetchResults(url) {
+        fetch(url, { headers: { 'X-Requested-With': 'XMLHttpRequest' } })
+          .then(function (res) { return res.json(); })
+          .then(function (data) {
+            tbody.innerHTML = data.rows;
+            paginationWrap.innerHTML = data.pagination;
+          })
+          .catch(function () {
+            // Kalau AJAX gagal, biarkan form fallback jalan normal (reload biasa)
+          });
+      }
+
+      if (searchInput) {
+        searchInput.addEventListener('input', function () {
+          clearTimeout(debounceTimer);
+          const value = searchInput.value;
+          debounceTimer = setTimeout(function () {
+            const url = baseUrl + '?search=' + encodeURIComponent(value);
+            fetchResults(url);
+          }, 350); // jeda 350ms biar tidak spam request tiap ketikan
+        });
+      }
+
+      // Klik link pagination juga lewat AJAX, tidak reload halaman
+      if (paginationWrap) {
+        paginationWrap.addEventListener('click', function (e) {
+          const link = e.target.closest('a');
+          if (!link) return;
+          e.preventDefault();
+          fetchResults(link.href);
+        });
+      }
+    })();
+  </script>
 </body>
 </html>

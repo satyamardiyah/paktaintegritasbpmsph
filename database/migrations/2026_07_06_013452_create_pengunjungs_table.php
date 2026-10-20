@@ -11,8 +11,6 @@ return new class extends Migration
         Schema::create('pengunjungs', function (Blueprint $table) {
             $table->id();
             $table->string('ip_address')->nullable();
-            $table->string('user_agent')->nullable();
-            $table->string('halaman')->nullable(); // halaman yang dikunjungi
             $table->timestamps();
         });
     }

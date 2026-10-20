@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pengunjung extends Model
 {
-    protected $fillable = ['ip_address', 'user_agent', 'halaman'];
+    protected $fillable = ['ip_address', ];
 }

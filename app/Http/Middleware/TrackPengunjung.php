@@ -15,8 +15,6 @@ class TrackPengunjung
         if ($request->is('pakta') || $request->is('/')) {
             Pengunjung::create([
                 'ip_address' => $request->ip(),
-                'user_agent' => $request->userAgent(),
-                'halaman' => $request->path(),
             ]);
         }
 

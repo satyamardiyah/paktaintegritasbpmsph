@@ -370,3 +370,160 @@ canvas{
 }
 
 /* pan buttons removed */
+
+@media (max-width: 768px) {
+    .paper-container.dashboard-page {
+        justify-content: center;
+        width: 100%;
+        padding: 12px;
+        overflow-x: hidden;
+    }
+
+    .paper.dashboard-paper,
+    .paper-container.dashboard-page .paper.dashboard-paper,
+    .content.full .paper.dashboard-paper {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        min-height: 0;
+        margin: 0;
+        padding: 20px 16px;
+        box-shadow: 0 4px 18px rgba(0, 0, 0, .08);
+    }
+
+    .paper,
+    .paper * {
+        overflow-wrap: normal;
+        word-break: normal;
+    }
+
+    .kop {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        grid-template-areas:
+            "logo-left logo-right"
+            "text text";
+        align-items: center;
+        justify-items: center;
+        gap: 12px;
+    }
+
+    .kop > img {
+        grid-area: logo-left;
+        width: 64px;
+        max-width: 100%;
+    }
+
+    .kop .kop-text {
+        grid-area: text;
+        width: 100%;
+        min-width: 0;
+        line-height: 1.25;
+    }
+
+    .kop-text h5 {
+        font-size: clamp(15px, 4.5vw, 19px);
+        line-height: 1.2;
+    }
+
+    .kop-text h6 {
+        font-size: clamp(11px, 3.3vw, 13px);
+        line-height: 1.3;
+    }
+
+    .kop-text p {
+        font-size: 11px;
+        line-height: 1.4;
+        overflow-wrap: anywhere;
+    }
+
+    .kan-logo-block {
+        grid-area: logo-right;
+        align-items: center;
+        text-align: center;
+    }
+
+    .kan-logo-block img {
+        width: 76px;
+        max-width: 100%;
+    }
+
+    .kan-labels {
+        margin-top: 4px;
+        font-size: 11px;
+    }
+
+    .kan-labels p {
+        font-size: 10px;
+    }
+
+    .garis1 {
+        margin-top: 16px;
+    }
+
+    .garis2 {
+        margin-bottom: 24px;
+    }
+
+    .judul {
+        margin-bottom: 24px;
+        font-size: 1.25rem;
+    }
+
+    form table {
+        border-collapse: separate;
+        border-spacing: 0 8px;
+    }
+
+    form table tr {
+        display: block;
+        padding-bottom: 8px;
+        border-bottom: 1px solid #e5e7eb;
+    }
+
+    form table td {
+        display: block;
+        width: 100%;
+        padding: 3px 0;
+    }
+
+    form table td:nth-child(2) {
+        display: none;
+    }
+
+    form table td:first-child {
+        font-weight: 600;
+    }
+
+    .isi {
+        margin-top: 24px;
+        line-height: 1.7;
+        text-align: left;
+    }
+
+    .isi ol {
+        padding-left: 22px;
+    }
+
+    .signature-area {
+        justify-content: center;
+        margin-top: 36px;
+    }
+
+    .ttd {
+        width: 100%;
+        max-width: 320px;
+    }
+
+    .paper.dashboard-paper canvas {
+        display: block;
+        max-width: 100%;
+        touch-action: none;
+    }
+
+    .paper.dashboard-paper form > .text-center .btn {
+        width: 100%;
+        max-width: 360px;
+        white-space: normal;
+    }
+}

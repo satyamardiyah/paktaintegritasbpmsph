@@ -170,6 +170,33 @@
 
                 <td>
 
+                    Nomor WhatsApp
+
+                </td>
+
+                <td>
+
+                    :
+
+                </td>
+
+                <td>
+
+                    <input
+                        type="tel"
+                        class="form-control"
+                        name="no_wa"
+                        value="{{ old('no_wa') }}"
+                        required>
+
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+
                     Email
 
                 </td>
@@ -361,46 +388,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.2.0/dist/signature_pad.umd.min.js"></script>
 
-<script>
-
-document.addEventListener("DOMContentLoaded", function () {
-
-    const hamburger = document.getElementById("hamburger");
-    const sidebar = document.getElementById("sidebar");
-    const content = document.querySelector(".content");
-    const paper = document.querySelector(".paper.dashboard-paper");
-
-    hamburger.addEventListener("click", function () {
-
-        // hitung status sebelum toggle
-        const wasClosed = sidebar.classList.contains("close");
-
-        // toggle sidebar and content width so content margin adjusts
-        sidebar.classList.toggle("close");
-        if (content) content.classList.toggle('full');
-
-        // jika ada paper container, geser horizontal sehingga hanya paper yang terlihat bergerak
-        const paperContainer = document.querySelector('.paper-container.dashboard-page');
-
-        if (paperContainer) {
-            const shift = 180; // nilai pergeseran, sesuaikan jika perlu
-
-            if (wasClosed) {
-                // sidebar sebelumnya sempit, sekarang melebar -> geser paper ke kanan
-                paperContainer.scrollBy({ left: shift, behavior: 'smooth' });
-            } else {
-                // sidebar sebelumnya lebar, sekarang sempit -> geser paper ke kiri
-                paperContainer.scrollBy({ left: -shift, behavior: 'smooth' });
-            }
-        }
-
-    });
-
-    // no pan buttons — rely on scrollbar and toggle behavior
-
-});
-
-</script>
 <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.2.0/dist/signature_pad.umd.min.js"></script>
 <script>
 const canvas = document.getElementById("signature");

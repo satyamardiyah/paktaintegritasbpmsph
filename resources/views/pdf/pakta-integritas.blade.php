@@ -49,11 +49,16 @@
 
     .ttd { margin-top: 50px; text-align: right; }
     .ttd p { margin: 3px 0; }
-    img.sign { height: 70px; margin: 6px 0; }
+    .ttd-box { display: inline-block; text-align: center; }
+    img.sign { height: 70px; margin: 6px 0; display: block; margin-left: auto; margin-right: auto; }
     .nama-ttd { font-weight: bold; margin-top: 4px; }
 </style>
 </head>
 <body>
+
+@php
+    \Carbon\Carbon::setLocale('id');
+@endphp
 
 <div class="kop">
     <table>
@@ -89,6 +94,7 @@
     <tr><td>Nama Lengkap</td><td>:</td><td>{{ $pakta->nama }}</td></tr>
     <tr><td>Jabatan</td><td>:</td><td>{{ $pakta->jabatan }}</td></tr>
     <tr><td>Instansi</td><td>:</td><td>{{ $pakta->instansi }}</td></tr>
+    <tr><td>Nomor Telepon WhatsApp</td><td>:</td><td>{{ $pakta->no_wa }}</td></tr>
     <tr><td>Email</td><td>:</td><td>{{ $pakta->email }}</td></tr>
     <tr><td>Kepentingan dengan BPMSPH</td><td>:</td><td>{{ $pakta->kepentingan }}</td></tr>
     <tr><td>Alamat</td><td>:</td><td>{{ $pakta->alamat }}</td></tr>
@@ -112,8 +118,10 @@ Menyatakan bahwa saya dengan sungguh-sungguh dalam rangka pelaksanaan kegiatan d
 <div class="ttd">
     <p>Bogor, {{ $pakta->created_at->translatedFormat('d F Y') }}</p>
     <p>Yang Membuat Pernyataan,</p>
-    <img class="sign" src="{{ $pakta->signature }}">
-    <p class="nama-ttd">{{ $pakta->nama }}</p>
+    <div class="ttd-box">
+        <img class="sign" src="{{ $pakta->signature }}">
+        <p class="nama-ttd">{{ $pakta->nama }}</p>
+    </div>
 </div>
 
 </body>
